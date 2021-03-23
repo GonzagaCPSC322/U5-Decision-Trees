@@ -22,6 +22,42 @@ X_train = [
 
 y_train = ["False", "False", "True", "True", "True", "False", "True", "False", "True", "True", "True", "True", "True", "False"]
 
+# how do we represent trees in Python? a few ways...
+# 1. nested data structures (e.g. nested lists, nested dictionaries)
+# 2. OOP (e.g. MyTree class...)
+
+# we will do approach #1 (nested lists)
+# each list can be one of three types ("Attribute", "Attribute Value", "Leaf")
+
+# example... nested list tree representation for the interview tree
+# index 0 types
+# index 1 value of the type
+interview_tree = \
+["Attribute", "level", 
+    ["Value", "Senior", 
+        ["Attribute", "tweets", 
+            ["Value", "yes", 
+                ["Leaf", "True", 2, 5]
+            ],
+            ["Value", "no", 
+                ["Leaf", "False", 3, 5]
+            ]
+        ]
+    ],
+    ["Value", "Mid", 
+        ["Leaf", "True", 4, 14]
+    ],
+    ["Value", "Junior", 
+        ["Attribute", "phd", 
+            ["Value", "yes", 
+                ["Leaf", "False", 2, 5]
+            ],
+            ["Value", "no", 
+                ["Leaf", "True", 3, 5]
+            ]
+        ]
+    ]
+]
 
 def tdidt(current_instances, available_attributes):
     # basic approach (uses recursion!!):

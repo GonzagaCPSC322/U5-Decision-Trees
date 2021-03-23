@@ -22,6 +22,42 @@ X_train = [
 
 y_train = ["False", "False", "True", "True", "True", "False", "True", "False", "True", "True", "True", "True", "True", "False"]
 
+# how to represent trees in python?? a few ways
+# 1. OOP (e.g. a Node class (or struct) or a Tree class (or struct))
+# 2. nested data structures (e.g. nested lists)
+
+# we are going to do approach #2
+# there are three types of lists (Attribute, Attribute Value, Leaf)
+# example!! build the solution decision tree for the interview data
+# using nested lists
+# index 0 types
+# index 1 value of the type
+interview_tree = \
+["Attribute", "level", 
+    ["Value", "Senior", 
+        ["Attribute", "tweets", 
+            ["Value", "yes", 
+                ["Leaf", "True", 2, 5]
+            ],
+            ["Value", "no", 
+                ["Leaf", "False", 3, 5]
+            ]
+        ]
+    ],
+    ["Value", "Mid", 
+        ["Leaf", "True", 4, 14]
+    ],
+    ["Value", "Junior", 
+        ["Attribute", "phd", 
+            ["Value", "yes", 
+                ["Leaf", "False", 2, 5]
+            ],
+            ["Value", "no", 
+                ["Leaf", "True", 3, 5]
+            ]
+        ]
+    ]
+]
 
 def tdidt(current_instances, available_attributes):
     # basic approach (uses recursion!!):
@@ -33,3 +69,5 @@ def tdidt(current_instances, available_attributes):
     #    CASE 2: no more attributes to select (clash) => handle clash w/majority vote leaf node
     #    CASE 3: no more instances to partition (empty partition) => backtrack and replace attribute node with majority vote leaf node
     return None
+
+
