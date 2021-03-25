@@ -77,6 +77,11 @@ def partition_instances(instances, split_attribute):
     # lets build a dictionary
     partitions = {} # key (attribute value): value (list of instances with this attribute value)
     # task: try this!
+    for attribute_value in attribute_domain:
+        partitions[attribute_value] = []
+        for instance in instances:
+            if instance[attribute_index] == attribute_value:
+                partitions[attribute_value].append(instance)
     return partitions
 
 def tdidt(current_instances, available_attributes):
@@ -95,10 +100,25 @@ def tdidt(current_instances, available_attributes):
     print("partitions:", partitions)
 
     # for each partition, repeat unless one of the following occurs (base case)
-    #    CASE 1: all class labels of the partition are the same => make a leaf node
-    #    CASE 2: no more attributes to select (clash) => handle clash w/majority vote leaf node
-    #    CASE 3: no more instances to partition (empty partition) => backtrack and replace attribute node with majority vote leaf node
-    return None
+    for attribute_value, partition in partitions.items():
+        print("working with partition for:", attribute_value)
+        value_subtree = ["Value", attribute_value]
+        # TODO: appending leaf nodes and subtrees appropriately to value_subtree
+        #    CASE 1: all class labels of the partition are the same => make a leaf node
+        if len(partition) > 0 and all_same_class(partition):
+            print("CASE 1")
+        #    CASE 2: no more attributes to select (clash) => handle clash w/majority vote leaf node
+        elif len(partition) > 0 and len(available_attributes) == 0:
+            print("CASE 2")
+        #    CASE 3: no more instances to partition (empty partition) => backtrack and replace attribute node with majority vote leaf node
+        elif len(partition) == 0:
+            print("CASE 3")
+        else: # all base cases are false... recurse!!
+            subtree = tdidt(partition, available_attributes.copy())
+            # need to append subtree to value_subtree and appropriately append value subtre
+            # to tree
+    
+    return tree
 
 def fit_starter_code():
     # fit() accepts X_train and y_train
