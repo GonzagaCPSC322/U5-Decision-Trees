@@ -1,3 +1,5 @@
+import random 
+
 header = ["level", "lang", "tweets", "phd"]
 attribute_domains = {"level": ["Senior", "Mid", "Junior"], 
         "lang": ["R", "Python", "Java"],
@@ -59,13 +61,55 @@ interview_tree = \
     ]
 ]
 
+def select_attribute(instances, available_attributes):
+    # for now, we are going to select an attribute randomly
+    # TODO: come back after you can build a tree with 
+    # random attribute selection and replace with entropy
+    rand_index = random.randrange(0, len(available_attributes))
+    return available_attributes[rand_index]
+
+def partition_instances(instances, split_attribute):
+    # this is a group by split_attribute's domain, not by
+    # the values of this attribute in instances
+    # example: if split_attribute is "level"
+    attribute_domain = attribute_domains[split_attribute] # ["Senior", "Mid", "Junior"]
+    attribute_index = header.index(split_attribute) # 0
+    # lets build a dictionary
+    partitions = {} # key (attribute value): value (list of instances with this attribute value)
+    # task: try this!
+    return partitions
+
 def tdidt(current_instances, available_attributes):
     # basic approach (uses recursion!!):
 
     # select an attribute to split on
+    split_attribute = select_attribute(current_instances, available_attributes)
+    print("splitting on:", split_attribute)
+    available_attributes.remove(split_attribute)
+    # cannot split on the same attribute twice in a branch
+    # recall: python is pass by object reference!!
+    tree = ["Attribute", split_attribute]
+
     # group data by attribute domains (creates pairwise disjoint partitions)
+    partitions = partition_instances(current_instances, split_attribute)
+    print("partitions:", partitions)
+
     # for each partition, repeat unless one of the following occurs (base case)
     #    CASE 1: all class labels of the partition are the same => make a leaf node
     #    CASE 2: no more attributes to select (clash) => handle clash w/majority vote leaf node
     #    CASE 3: no more instances to partition (empty partition) => backtrack and replace attribute node with majority vote leaf node
     return None
+
+def fit_starter_code():
+    # fit() accepts X_train and y_train
+    # TODO: compute the attribute domains dictionary
+    # TODO: compute a "header" ["att0", "att1", ...]
+    # my advice is to stitch together X_train and y_train
+    train = [X_train[i] + [y_train[i]] for i in range(len(X_train))]
+    # initial call to tdidt current instances is the whole table (train)
+    available_attributes = header.copy() # python is pass object reference
+    tree = tdidt(train, available_attributes)
+    print("tree:", tree)
+
+
+fit_starter_code()
