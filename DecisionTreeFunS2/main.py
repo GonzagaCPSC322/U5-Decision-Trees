@@ -120,6 +120,16 @@ def tdidt(current_instances, available_attributes):
     
     return tree
 
+# PA6 TODO (do a step a day for 7 days)
+# 1. all_same_class()
+# 2. append subtree to values_subtree and to tree appropriately
+# 3. work on CASE 1, then CASE 2, then CASE 3 (write helper functions!!)
+# e.g. compute_partition_stats()
+# 4. finish the TODOs in fit_starter_code()
+# 5. replace random w/entropy (compare tree w/interview_tree)
+# 6. move over starter code to PA6 OOP w/unit test fit()
+# 7. move on to predict()...
+
 def fit_starter_code():
     # fit() accepts X_train and y_train
     # TODO: compute the attribute domains dictionary
