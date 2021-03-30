@@ -1,0 +1,15 @@
+graph g {
+    # this is a comment
+    level [shape=box];
+    phd [shape=box];
+    level -- phd [label="Junior"];
+    false1 [label="False"];
+    true1 [label="True"];
+    phd -- false1 [label="yes"];
+    phd -- true1 [label="no"];
+
+    true2 [label="True"];
+    level -- true2 [label="Mid"];
+
+    # task: finish the tree!
+}

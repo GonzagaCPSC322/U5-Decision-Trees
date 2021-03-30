@@ -141,3 +141,19 @@ def fit_starter_code():
 
 
 fit_starter_code()
+
+# 2 more U5 Decision Trees topics
+# 1. tree visualization (BONUS PA6)
+# need to install graphviz in your docker container
+# a tree is a graph with some restrictions
+# specify our tree using the DOT graph language
+# create a .pdf file from a .dot (represents our tree in DOT language)
+# 2. pruning
+# bias vs variance trade-off (read about it...)
+# https://towardsdatascience.com/understanding-the-bias-variance-tradeoff-165e6942b229
+# post pruning is more common
+# for post pruning, you typically hold out "pruning set"
+# static error rates from running your tree over the pruning set
+# if the static error rate at a subtree with height/depth == 1 is <
+# the estimated error rate (at that that subtree), then prune
+# (replace this subtree with majority vote leaf node)

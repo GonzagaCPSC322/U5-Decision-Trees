@@ -141,5 +141,20 @@ def fit_starter_code():
     tree = tdidt(train, available_attributes)
     print("tree:", tree)
 
+# 2 more topics in U5 Decision Trees
+# 1. tree visualization w/graphviz (BONUS PA6)
+# a tree is really a graph with some restrictions
+# we will make a .dot file to represent our tree as a graph using the DOT language
+# we will create a .pdf file from the .dot file
+# 2. pruning
+# bias vs variance tradeoff (read about this...)
+# https://towardsdatascience.com/understanding-the-bias-variance-tradeoff-165e6942b229
+# post pruning is more common
+# need a "pruning set" to compute "static error rates"
+# compute "estimated error rates" for each split
+# if static error rate < estimated error rate for a subtree
+# with height/depth = 1, then prune 
+# prune -> replace with majority vote leaf node
+
 
 fit_starter_code()
