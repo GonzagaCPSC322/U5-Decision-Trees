@@ -12,4 +12,10 @@ graph g {
     level -- true2 [label="Mid"];
 
     # task: finish the tree!
+    tweets [shape=box];
+    level -- tweets [label="Senior"];
+    false3 [label="False"];
+    true3 [label="True"];
+    tweets -- false3 [label="no"];
+    tweets -- true3 [label="yes"];
 }

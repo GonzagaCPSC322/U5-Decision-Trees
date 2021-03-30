@@ -6,7 +6,16 @@ graph g {
     true1 [label="True"];
     phd -- false1 [label="yes"];
     phd -- true1 [label="no"];
+
     # this is a comment
     true2 [label="True"];
     level -- true2 [label="Mid"];
+
+    # task: finish the tree!
+    tweets [shape=box];
+    level -- tweets [label="Senior"];
+    false3 [label="False"];
+    true3 [label="True"];
+    tweets -- false3 [label="no"];
+    tweets -- true3 [label="yes"];
 }

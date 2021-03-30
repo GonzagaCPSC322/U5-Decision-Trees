@@ -84,6 +84,14 @@ def partition_instances(instances, split_attribute):
                 partitions[attribute_value].append(instance)
     return partitions
 
+def all_same_class(instances):
+    # assumption: instances is not empty and class label is at index -1
+    first_label = instances[0][-1]
+    for instance in instances:
+        if instance[-1] != first_label:
+            return False 
+    return True # if we get here, all instance labels matched the first label
+
 def tdidt(current_instances, available_attributes):
     # basic approach (uses recursion!!):
 
