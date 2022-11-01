@@ -35,12 +35,31 @@ attribute_domains = {"att0": ["Junior", "Mid", "Senior"],
 # value name, class label)
 # rest of elements: depends on the type
 # example!
+# TASK: finish the tree!
 interview_tree_solution =   ["Attribute", "att0", 
                                 ["Value", "Junior", 
                                     ["Attribute", "att3",
                                         ["Value", "no",
-                                            ["Leaf", "True", 3, 5]]]
-                                ]# TASK: finish the tree!
+                                            ["Leaf", "True", 3, 5]
+                                        ],
+                                        ["Value", "yes", 
+                                            ["Leaf", "False", 2, 5]
+                                        ]
+                                    ]
+                                ],
+                                ["Value", "Mid", 
+                                    ["Leaf", "True", 4, 14]
+                                ],
+                                ["Value", "Senior", 
+                                    ["Attribute", "att2", 
+                                        ["Value", "no", 
+                                            ["Leaf", "False", 3, 5]
+                                        ],
+                                        ["Value", "yes",
+                                            ["Leaf", "True", 2, 5]
+                                        ]
+                                    ]
+                                ]
                             ]
 
 def tdidt(current_instances, available_attributes):
