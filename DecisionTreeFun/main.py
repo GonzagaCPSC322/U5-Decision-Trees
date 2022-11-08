@@ -85,6 +85,14 @@ def partition_instances(instances, attribute):
                 partitions[att_value].append(instance)
     return partitions
 
+def same_class_label(instances):
+    first_label = instances[0][-1]
+    for instance in instances:
+        if instance[-1] != first_label:
+            return False
+    # get here, all the same
+    return True
+
 def tdidt(current_instances, available_attributes):
     # basic approach (uses recursion!!):
     print("available attributes:", available_attributes)
@@ -138,3 +146,20 @@ def fit_starter_code():
     # note the unit test will assert tree == interview_tree_solution
 
 fit_starter_code()
+
+# general Enew algorithm pseudocode
+# for each available attribute:
+#   for each attribute value in the domain:
+#       Compute the entropy of that value partition
+#           (e.g. proportion and log for each class)
+#   Compute Enew by taking weighted sum of the partition entropies
+# Choose to split on the attribute with the smallest Enew
+
+# PA7 TODO (do a step a day for 7 days, starting today)
+# 1. all_same_class()
+# 2. append subtree to value_subtree and to tree appropriately
+# 3. work on CASE 1, then CASE 2, then CASE 3 (write helper functions!!)
+# 4. finish the TODOs in fit_starter_code()
+# 5. replace random w/entropy (compare tree w/interview_tree_solution... note attribute domain ordering may need to be adjusted)
+# 6. Implement unit test for fit() and move starter code over to OOP 
+# 7. move on to predict()
