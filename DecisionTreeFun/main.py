@@ -205,4 +205,8 @@ predict_starter_code()
 # example: interview_tree.dot
 
 # 2. tree pruning (no coding part for PA7)
-# TODO: finish these notes
+# decision trees are notorious for overfitting to a training set
+# this means that trees don't tend to genrealize well to unseen
+# instances
+# to combat this, you typically do pruning, such as post-
+# pruning with a pruning set
