@@ -156,10 +156,42 @@ fit_starter_code()
 # Choose to split on the attribute with the smallest Enew
 
 # PA7 TODO (do a step a day for 7 days, starting today)
-# 1. all_same_class()
-# 2. append subtree to value_subtree and to tree appropriately
-# 3. work on CASE 1, then CASE 2, then CASE 3 (write helper functions!!)
-# 4. finish the TODOs in fit_starter_code()
-# 5. replace random w/entropy (compare tree w/interview_tree_solution... note attribute domain ordering may need to be adjusted)
-# 6. Implement unit test for fit() and move starter code over to OOP 
-# 7. move on to predict()
+# 1. thurs: all_same_class()
+# 2. fri: append subtree to value_subtree and to tree appropriately
+# 3. sat: work on CASE 1, then CASE 2, then CASE 3 (write helper functions!!)
+# 4. sun: finish the TODOs in fit_starter_code()
+# 5. mon: replace random w/entropy (compare tree w/interview_tree_solution... note attribute domain ordering may need to be adjusted)
+# 6. tues: Implement unit test for fit() and move starter code over to OOP 
+# 7. weds: move on to predict()
+
+def tdidt_predict(tree, instance):
+    # are we at a leaf node (base case)
+    # or an attribute node (need to recurse)
+    info_type = tree[0] # Attribute or Leaf
+    if info_type == "Leaf":
+        # base case
+        return tree[1] # label
+
+    # if we are here, then we are at an Attribute node
+    # we need to figure where in instance, this attribute's value is
+    att_index = header.index(tree[1])
+    # now loop through all of the value lists, looking for a 
+    # match to instance[att_index]
+    for i in range(2, len(tree)):
+        value_list = tree[i]
+        if value_list[1] == instance[att_index]:
+            # we have a match, recurse on this value's subtree
+            return tdidt_predict(value_list[2], instance)
+
+
+# predict starter code!!
+def predict_starter_code():
+    # we need some unseen instances
+    instance1 = ["Junior", "Java", "yes", "no"] # True
+    instance2 = ["Junior",  "Java", "yes", "yes"] # False
+    instance3 = ["Intern",  "Java", "yes", "yes"] # None
+    # b/c "Intern" is not in the attribute domain for att0 (level)
+    prediction = tdidt_predict(interview_tree_solution, instance3)
+    print("prediction:", prediction)
+
+predict_starter_code()
