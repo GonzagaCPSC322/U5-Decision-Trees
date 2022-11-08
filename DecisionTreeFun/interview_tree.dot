@@ -1,0 +1,17 @@
+graph g {
+    // declare a node for level
+    level [shape=box];
+    phd [shape=box];
+    // make a connection between level and phd
+    level -- phd [label="Junior"];
+    // task: finish the tree
+    // for more info on attributes available: https://graphviz.org/doc/info/attrs.html
+
+    true1 [label="True"];
+    false1 [label="False"];
+    phd -- true1 [label="no"];
+    phd -- false1 [label="yes"];
+
+    true2 [label="True"];
+    level -- true2 [label="Mid"];
+}

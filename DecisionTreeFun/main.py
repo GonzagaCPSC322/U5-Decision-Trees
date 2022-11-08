@@ -195,3 +195,14 @@ def predict_starter_code():
     print("prediction:", prediction)
 
 predict_starter_code()
+
+# 2 more short tree topics for unit 5 (U5)
+# 1. tree visualization (BONUS for PA7)
+# we will use the dot language (from graphviz) to represent
+# a tree as a graph
+# then we will create a PDF using the dot program
+# note: you will need to install the docker dependencies for graphviz
+# example: interview_tree.dot
+
+# 2. tree pruning (no coding part for PA7)
+# TODO: finish these notes
