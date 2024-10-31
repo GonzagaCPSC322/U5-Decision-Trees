@@ -1,5 +1,6 @@
 # this code is adapted to python from my C++ recursion examples here: https://github.com/GonzagaCPSC122/RecursionFun/tree/master
 # see the corresponding recursion videos in this playlist: https://youtube.com/playlist?list=PL7uPCUbavAWcpim5348ad79x6yZ1N73Gf&si=zhVyHI3LucAlSiVm
+# see the recursion assignment here for practice problems: https://docs.google.com/document/d/1yN_JXoIyfhlDAka9UzIMyury2LXQgopEQOH9f9jpVHw/edit?tab=t.0#heading=h.6diexf3ifwty
 
 # a recursive function: a function that directly (or indirectly) calls itself
 # pro: simple/short/elegant solutions for some problems (compared to iterative solutions)
