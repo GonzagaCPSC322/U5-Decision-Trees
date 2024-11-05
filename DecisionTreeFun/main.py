@@ -1,4 +1,4 @@
-
+import numpy as np
 
 X_train = [
         ["Senior", "Java", "no", "no"],
@@ -38,24 +38,103 @@ interview_tree_solution =   ["Attribute", "att0",
                                     ["Attribute", "att3",
                                         ["Value", "no",
                                             ["Leaf", "True", 3, 5]
-                                        ]# TASK: finish the tree!
+                                        ],
+                                        ["Value", "yes",
+                                            ["Leaf", "False", 2, 5]
+                                        ]
                                     ]
+                                ],
+                                ["Value", "Mid",
+                                    ["Leaf", "True", 4, 14] 
+                                ],
+                                ["Value", "Senior",
+                                    ["Attribute", "att2",
+                                        ["Value", "no",
+                                            ["Leaf", "False", 3, 5] 
+                                        ],
+                                        ["Value", "yes",
+                                            ["Leaf", "True", 2, 5] 
+                                        ]
+                                    ] 
                                 ]
                             ]
+
+def select_attribute(instances, attributes):
+    # TODO: implement the general Enew algorithm for attribute selection
+    # for each available attribute
+    #     for each value in the attribute's domain
+    #          calculate the entropy for the value's partition
+    #     calculate the weighted average for the parition entropies
+    # select that attribute with the smallest Enew entropy
+    # for now, select an attribute randomly
+    rand_index = np.random.randint(0, len(attributes))
+    return attributes[rand_index]
+
+def partition_instances(instances, attribute):
+    # this is group by attribute domain (not values of attribute in instances)
+    # lets use dictionaries
+    att_index = header.index(attribute)
+    att_domain = attribute_domains[attribute]
+    partitions = {}
+    for att_value in att_domain: # "Junior" -> "Mid" -> "Senior"
+        partitions[att_value] = []
+        for instance in instances:
+            if instance[att_index] == att_value:
+                partitions[att_value].append(instance)
+
+    return partitions
+
+def all_same_class(instances):
+    first_class = instances[0][-1]
+    for instance in instances:
+        if instance[-1] != first_class:
+            return False
+    # get here, then all same class labels
+    return True 
+
 def tdidt(current_instances, available_attributes):
+    print("available attributes:", available_attributes)
     # basic approach (uses recursion!!):
     # select an attribute to split on
+    split_attribute = select_attribute(current_instances, available_attributes)
+    print("splitting on:", split_attribute)
+    available_attributes.remove(split_attribute) # can't split on this attribute again
+    # in this subtree
+    tree = ["Attribute", split_attribute]
     # group data by attribute domains (creates pairwise disjoint partitions)
+    partitions = partition_instances(current_instances, split_attribute)
+    print("partitions:", partitions)
     # for each partition, repeat unless one of the following occurs (base case)
-    #    CASE 1: all class labels of the partition are the same => make a leaf node
-    #    CASE 2: no more attributes to select (clash) => handle clash w/majority vote leaf node
-    #    CASE 3: no more instances to partition (empty partition) => backtrack and replace attribute node with majority vote leaf node
-    return None
+    for att_value in sorted(partitions.keys()): # process in alphabetical order
+        att_partition = partitions[att_value]
+        value_subtree = ["Value", att_value]
+        #    CASE 1: all class labels of the partition are the same => make a leaf node
+        if len(att_partition) > 0 and all_same_class(att_partition):
+            print("CASE 1")
+        #    CASE 2: no more attributes to select (clash) => handle clash w/majority vote leaf node
+        elif len(att_partition) > 0 and len(available_attributes) == 0:
+            print("CASE 2")
+        #    CASE 3: no more instances to partition (empty partition) => backtrack and replace attribute node with majority vote leaf node
+        elif len(att_partition) == 0:
+            print("CASE 3")
+        else:
+            # none of base cases were true, recurse!!
+            subtree = tdidt(att_partition, available_attributes.copy())
+            # TODO: append subtree to value_subtree and value_subtree to tree appropriately
+    return tree
 
 def fit_starter_code():
     # note the TODO above
     # here would be a good place to programmatically extract
     # the header and attribute_domains
-    pass
+    # lets stich together X_train and y_train
+    train = [X_train[i] + [y_train[i]] for i in range(len(X_train))]
+    # print(train)
+    # make a copy a header, b/c python is pass by object reference
+    # and tdidt will be removing attributes from available_attributes
+    available_attributes = header.copy()
+    tree = tdidt(train, available_attributes)
+    print("tree:", tree)
+    # your unit test will assert tree == interview_tree_solution
 
 fit_starter_code()
