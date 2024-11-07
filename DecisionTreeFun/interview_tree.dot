@@ -1,0 +1,15 @@
+graph g {
+    level[shape=box];
+    phd[shape=box];
+    // add an edge
+    level -- phd[label="Junior"];
+
+    true1[label="True"];
+    false1[label="False"];
+    phd -- true1[label="no"];
+    phd -- false1[label="yes"];
+
+    true2[label="True"];
+    level -- true2[label="Mid"];
+    // TODO: finish the tree!
+}

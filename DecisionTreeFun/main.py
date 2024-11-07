@@ -108,13 +108,16 @@ def tdidt(current_instances, available_attributes):
     for att_value in sorted(partitions.keys()): # process in alphabetical order
         att_partition = partitions[att_value]
         value_subtree = ["Value", att_value]
-        #    CASE 1: all class labels of the partition are the same => make a leaf node
+        #    CASE 1: all class labels of the partition are the same
+        # => make a leaf node
         if len(att_partition) > 0 and all_same_class(att_partition):
             print("CASE 1")
-        #    CASE 2: no more attributes to select (clash) => handle clash w/majority vote leaf node
+        #    CASE 2: no more attributes to select (clash)
+        # => handle clash w/majority vote leaf node
         elif len(att_partition) > 0 and len(available_attributes) == 0:
             print("CASE 2")
-        #    CASE 3: no more instances to partition (empty partition) => backtrack and replace attribute node with majority vote leaf node
+        #    CASE 3: no more instances to partition (empty partition)
+        # => backtrack and replace attribute node with majority vote leaf node
         elif len(att_partition) == 0:
             print("CASE 3")
         else:
@@ -137,4 +140,46 @@ def fit_starter_code():
     print("tree:", tree)
     # your unit test will assert tree == interview_tree_solution
 
+def tdidt_predict(tree, instance):
+    # base case: we are at a leaf node and can return the class prediction
+    info_type = tree[0] # "Leaf" or "Attribute"
+    if info_type == "Leaf":
+        return tree[1] # class label
+    
+    # if we are here, we are at an Attribute
+    # we need to match the instance's value for this attribute
+    # to the appropriate subtree
+    att_index = header.index(tree[1])
+    for i in range(2, len(tree)):
+        value_list = tree[i]
+        # do we have a match with instance for this attribute?
+        if value_list[1] == instance[att_index]:
+            return tdidt_predict(value_list[2], instance)
+
+
+def predict_starter_code():
+    # we need test instances
+    instance1 = ["Junior", "Java", "yes", "no"] # True
+    instance2 = ["Junior", "Java", "yes", "yes"] # False
+    instance3 = ["Intern", "Java", "yes", "yes"] # None
+    prediction = tdidt_predict(interview_tree_solution, instance3)
+    print("prediction:", prediction)
+
 fit_starter_code()
+predict_starter_code()
+
+# 2 more short decision tree topics for Unit 5
+# 1. tree visualization (bonus for PA7)
+# we will use the dot language (part of graphviz) to 
+# represent our tree as a graph
+# we can make a PDF visualization from the graph rep
+# using: dot -Tpdf -o interview_tree.pdf interview_tree.dot
+
+# 2. pruning
+# often decision trees overfit to their training set
+# which means the tree likely doesn't generalize well to unseen 
+# instances 
+# to combat this, you often use pruning techniques
+# for example, post pruning with a pruning set
+# we will not implement this, though I ask you to think 
+# about it on PA7
