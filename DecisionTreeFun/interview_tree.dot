@@ -12,4 +12,5 @@ graph g {
     true2[label="True"];
     level -- true2[label="Mid"];
     // TODO: finish the tree!
+    // check out the docs for attributes you can use: https://graphviz.org/doc/info/attrs.html
 }
